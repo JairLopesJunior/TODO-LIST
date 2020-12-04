@@ -23,11 +23,25 @@
 
     function generateLiTask(obj){
         const li = document.createElement("li")
-        li.className = "todo-item"
         const p = document.createElement("p")
+        const checkButton = document.createElement("button")
+        const editButton = document.createElement("i")
+        const deleteButton = document.createElement("i")
+
+        li.className = "todo-item"
+        checkButton.className = "button-check"
+        checkButton.innerHTML = '<i class=\"fas fa-check displayNone">';
+        li.appendChild(checkButton)
+
         p.className = "task-name"
         p.textContent = obj.name
         li.appendChild(p)
+
+        editButton.className = "fas fa-edit"
+        li.appendChild(editButton)
+
+        deleteButton.className = "fas fa-trash-alt";
+        li.appendChild(deleteButton)
 
         addEventLi(li)
 
