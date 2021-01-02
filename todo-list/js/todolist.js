@@ -99,15 +99,15 @@
             currentLi = currentLi.parentElement
         }
 
-        console.log(currentLi);
-        console.log(lis)
-
         const currentLiIndex = [...lis].indexOf(currentLi)
-        console.log(currentLiIndex)
 
         const action = {
             editButton: function(){
                 console.log("editButton no objeto")
+            },
+            deleteButton: function(){
+                arrTasks.splice(currentLiIndex, 1)
+                renderTasks()
             }
         }
 
