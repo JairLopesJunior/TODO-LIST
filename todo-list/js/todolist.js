@@ -103,7 +103,11 @@
 
         const action = {
             editButton: function(){
-                console.log("editButton no objeto")
+                const editContainer = currentLi.querySelector(".editContainer");
+                [...ul.querySelectorAll(".editContainer")].forEach(container => {
+                    container.removeAttribute("style")
+                });
+                editContainer.style.display = "flex";
             },
             deleteButton: function(){
                 arrTasks.splice(currentLiIndex, 1)
