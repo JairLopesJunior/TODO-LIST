@@ -91,21 +91,31 @@
     }
 
     function clickeUl(e){
-        console.log(e.target);
-        console.log(e.target.getAttribute("data-action"))
-    }
+        const dataAction = e.target.getAttribute("data-action")
+        if(!dataAction)return;
 
-    const action = {
-        editButton: function(){
-            console.log("editButton no objeto")
+        let currentLi = e.target
+        while(currentLi.nodeName !== "LI"){
+            currentLi = currentLi.parentElement
+        }
+
+        console.log(currentLi);
+        console.log(lis)
+
+        const currentLiIndex = [...lis].indexOf(currentLi)
+        console.log(currentLiIndex)
+
+        const action = {
+            editButton: function(){
+                console.log("editButton no objeto")
+            }
+        }
+
+        if(action[dataAction]){
+            action[dataAction]()
         }
     }
-
-    const dataAction = e.target.getAttribute("data-action")
-    if(action[dataAction]){
-        action[dataAction]()
-    }
-
+    
     todoItemBtn.addEventListener("submit", function(e){
         e.preventDefault(); // Não envia o formulario
         console.log(itemInput.value);
