@@ -7,19 +7,33 @@
     const ul = document.getElementById("todo-list")
     const lis = ul.getElementsByTagName("li")
 
-    let arrTasks = [
-        {
-            name: "task 1",
-            createAt: Date.now(),
-            completed: false
-        }
-    ]
+    let arrTasks = getSavedData()
 
     // function addEventLi(li){
     //     li.addEventListener("click", function(){
     //         console.log(this)
     //     })
     // }
+
+    function getSavedData(){
+        let tasksData = localStorage.getItem("tasks")
+        tasksData = JSON.parse(tasksData)
+        console.log(typeof tasksData)
+
+        return tasksData.length ? tasksData : [
+            {
+                name: "task 1",
+                createAt: Date.now(),
+                completed: false
+            }
+        ]
+    }
+
+    function setNewData(){
+        localStorage.setItem("tasks", JSON.stringify(arrTasks));
+    }
+    
+    setNewData();
 
     function generateLiTask(obj){
         const li = document.createElement("li")
@@ -88,7 +102,7 @@
             createAt: Date.now(),
             completed: false
         })
-
+        setNewData();
     }
 
     function clickeUl(e){
@@ -113,11 +127,13 @@
             deleteButton: function(){
                 arrTasks.splice(currentLiIndex, 1)
                 renderTasks()
+                setNewData();
             },
             containerEditButton: function(){
                 const val =  currentLi.querySelector(".editInput").value
                 arrTasks[currentLiIndex].name = val
                 renderTasks();
+                setNewData();
             },
             containerCancelButton: function(){
                 currentLi.querySelector(".editContainer").removeAttribute("style")
@@ -127,12 +143,14 @@
             checkButton: function(){
                 arrTasks[currentLiIndex].completed = !arrTasks[currentLiIndex].completed
 
-                if(arrTasks[currentLiIndex].completed){
-                    currentLi.querySelector(".fa-check").classList.remove("displayNone")
-                }else{
-                    currentLi.querySelector(".fa-check").classList.add("displayNone")
-                }
+                // if(arrTasks[currentLiIndex].completed){
+                //     currentLi.querySelector(".fa-check").classList.remove("displayNone")
+                // }else{
+                //     currentLi.querySelector(".fa-check").classList.add("displayNone")
+                // }
 
+                setNewData();
+                renderTasks()
 
             }
         }
