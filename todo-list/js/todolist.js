@@ -118,6 +118,11 @@
                 const val =  currentLi.querySelector(".editInput").value
                 arrTasks[currentLiIndex].name = val
                 renderTasks();
+            },
+            containerCancelButton: function(){
+                currentLi.querySelector(".editContainer").removeAttribute("style")
+
+                currentLi.querySelector(".editInput").value = arrTasks[currentLiIndex].name
             }
         }
 
