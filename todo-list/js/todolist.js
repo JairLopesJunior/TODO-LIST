@@ -49,6 +49,7 @@
         const inputEdit = document.createElement("input")
         inputEdit.setAttribute("type", "text")
         inputEdit.className = "editInput"
+        inputEdit.value = obj.name
         containerEdit.appendChild(inputEdit)
 
         const containerEditButton = document.createElement("button")
@@ -112,6 +113,11 @@
             deleteButton: function(){
                 arrTasks.splice(currentLiIndex, 1)
                 renderTasks()
+            },
+            containerEditButton: function(){
+                const val =  currentLi.querySelector(".editInput").value
+                arrTasks[currentLiIndex].name = val
+                renderTasks();
             }
         }
 
